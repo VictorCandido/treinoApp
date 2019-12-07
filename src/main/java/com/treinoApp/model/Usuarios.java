@@ -2,10 +2,15 @@ package com.treinoApp.model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Table;
+import javax.validation.constraints.*;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.persistence.Id;
 
 @Entity
@@ -13,15 +18,32 @@ import javax.persistence.Id;
 public class Usuarios {
 	
 	@javax.persistence.Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
+	
+	@NotEmpty(message = "Nome não preenchido")
 	private String Nome;
+	
 	private Boolean Ativo;
+	
 	private Date DataNascimento;
+	
+	@NotEmpty(message = "CPF não preenchido")
+	@CPF(message = "CPF inválido")
 	private String Cpf;
+	
+	@NotNull(message = "A idade deve ser inserida")
+	@Min(value = 18, message = "A idade não deve ser menor do que 18 anos")
 	private Long Idade;
+	
 	private String Genero;
+	
 	private String Nacionalidade;
+	
 	private String Senha;
+	
+	@NotEmpty(message = "Campo E-mail não pode ser vazio")
+	@Email(message = "E-mail inválido")
 	private String Email;
 	
 	public Long getId() {
