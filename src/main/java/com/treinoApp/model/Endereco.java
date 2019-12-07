@@ -3,6 +3,8 @@ package com.treinoApp.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -19,6 +21,10 @@ public class Endereco {
 	private String Estado;
 	private String Pais;
 	private String Complemento;
+	
+	@ManyToOne
+	@JoinColumn(name="usuarios", referencedColumnName = "id", insertable = false, updatable = false) 
+	private Usuarios Usuarios;
 	
 	public Long getId() {
 		return Id;
